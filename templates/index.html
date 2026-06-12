@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Explainer</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Highlight.js Theme (Atom One Dark) -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <canvas id="splashLogoCanvas" width="150" height="150" class="splash-logo"></canvas>
+        <h1 class="splash-text">AI Code Explainer</h1>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <canvas id="headerLogoCanvas" width="48" height="48" class="header-logo"></canvas>
+                <h1>AI Code Explainer</h1>
+            </div>
+            <p class="subtitle">Understand any code instantly with AI-powered analogies</p>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Panel: Input -->
+            <div class="panel input-panel">
+                <div class="panel-header">
+                    <div class="tab active">Source Code</div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <select id="analogyTheme" class="theme-select">
+                            <option value="General Everyday Life">Everyday Life</option>
+                            <option value="Cricket">Cricket</option>
+                            <option value="Movies">Movies</option>
+                            <option value="Cooking">Cooking</option>
+                            <option value="Space Exploration">Space</option>
+                        </select>
+                        <button id="explainBtn" class="action-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="m5 12 7-7 7 7" />
+                                <path d="M12 19V5" />
+                            </svg>
+                            Explain Code
+                        </button>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <textarea id="codeInput"
+                        placeholder="// Paste your code here...&#10;&#10;def hello_world():&#10;    print('Hello, Universe!')"
+                        spellcheck="false"></textarea>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output -->
+            <div class="panel output-panel">
+                <div class="panel-header">
+                    <div class="tab active">AI Explanation</div>
+                </div>
+                <div class="content-container" id="outputContainer">
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="state-view">
+                        <div class="icon-wrap">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M12 2v20" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3>Ready to explain</h3>
+                        <p>Paste your code on the left and click "Explain Code" to get started.</p>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loadingState" class="state-view hidden">
+                        <div class="loader"></div>
+                        <h3>Analyzing code...</h3>
+                        <p>Generating a real-life analogy</p>
+                    </div>
+
+                    <!-- Result State -->
+                    <div id="resultState" class="markdown-body hidden">
+                        <!-- AI content goes here -->
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
